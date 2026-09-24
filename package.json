@@ -1,0 +1,12 @@
+{
+  "name": "iron-and-blade",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Iron & Blade Barbershop — Rosebank, Johannesburg",
+  "scripts": {
+    "build": "node scripts/build.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

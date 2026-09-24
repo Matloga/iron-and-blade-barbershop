@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact &amp; Directions — Iron &amp; Blade Barbershop, Rosebank</title>
+  <meta name="description" content="Contact Iron & Blade Barbershop in Rosebank, Johannesburg. Phone, WhatsApp, email, opening hours and directions to 88 Rivonia Road.">
+  <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Contact &amp; Directions — Iron &amp; Blade">
+  <meta property="og:description" content="Find the shop, check opening hours, or send us a message. Rosebank, Johannesburg.">
+  <meta property="og:image" content="assets/img/interior.jpg">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script src="assets/js/data.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+</head>
+<body>
+<!--#HEADER-->
+
+<main>
+  <section class="page-hero">
+    <div class="page-hero-bg"><img src="assets/img/interior.jpg" alt="" aria-hidden="true"></div>
+    <div class="container ph-content">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="index.html">Home</a><span>/</span><span>Contact</span>
+      </nav>
+      <h1>Find &amp; <em>contact us</em></h1>
+      <p class="lead">Right in the middle of Rosebank, two minutes from the Gautrain. Call ahead, WhatsApp us, or drop a message — we reply within a working day.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid-2" style="align-items:start;gap:48px">
+        <div>
+          <div class="grid-2" style="gap:16px;margin-bottom:34px">
+            <div class="info-card reveal">
+              <span class="ic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2a7 7 0 0 1 7 7c0 5-7 13-7 13S5 14 5 9a7 7 0 0 1 7-7z"/><circle cx="12" cy="9" r="2.5"/></svg></span>
+              <div>
+                <h3>Address</h3>
+                <p>Shop U12, 88 Rivonia Road<br>Rosebank, Johannesburg, 2196</p>
+                <a class="link-arrow" href="https://www.google.com/maps/search/?api=1&query=88+Rivonia+Road,+Rosebank,+Johannesburg" target="_blank" rel="noopener">Get directions</a>
+              </div>
+            </div>
+            <div class="info-card reveal">
+              <span class="ic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 15.5c-3.5 0-6.6-.9-9.2-2.6C8.2 11.2 6.8 8.9 6.5 6.2a1 1 0 0 0-1-.9H3.5A1.5 1.5 0 0 0 3 7.7C3 14.2 9.3 20.5 16.3 21a1.5 1.5 0 0 0 1.4-1v-2a1 1 0 0 0-.9-1z"/></svg></span>
+              <div>
+                <h3>Phone &amp; WhatsApp</h3>
+                <a href="tel:+27113258877">+27 11 325 8877</a>
+                <a href="https://wa.me/27113258877" target="_blank" rel="noopener">WhatsApp the shop</a>
+              </div>
+            </div>
+            <div class="info-card reveal">
+              <span class="ic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="m22 6-10 7L2 6"/></svg></span>
+              <div>
+                <h3>Email</h3>
+                <a href="mailto:hello@ironandblade.co.za">hello@ironandblade.co.za</a>
+              </div>
+            </div>
+            <div class="info-card reveal">
+              <span class="ic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span>
+              <div>
+                <h3>Hours</h3>
+                <div class="stack">
+                  <span style="font-size:13.5px;color:var(--muted)">Mon&ndash;Fri 8:30&ndash;18:00</span>
+                  <span style="font-size:13.5px;color:var(--muted)">Sat 8:00&ndash;16:00</span>
+                  <span style="font-size:13.5px;color:#d9684f">Sun Closed</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <h2 class="section-title" style="font-size:clamp(30px,4vw,42px);margin-bottom:18px;margin-top:12px">Opening <em>hours</em></h2>
+          <div class="hours-table" id="hoursTable" style="max-width:520px"></div>
+        </div>
+
+        <div>
+          <h2 class="section-title" style="font-size:clamp(30px,4vw,42px);margin-bottom:18px">Send a <em>message</em></h2>
+          <p style="color:var(--muted);font-size:15px;margin-bottom:24px">Questions about a style, a walk-in, or a group booking? Write to us and we'll get back to you within one working day.</p>
+          <form id="contactForm" novalidate style="background:var(--ink-3);border:1px solid var(--line);border-radius:var(--radius);padding:28px">
+            <div class="form-row-2">
+              <div class="field">
+                <label for="cfName">Your name</label>
+                <input id="cfName" type="text" autocomplete="name" placeholder="Full name">
+              </div>
+              <div class="field">
+                <label for="cfEmail">Email</label>
+                <input id="cfEmail" type="email" autocomplete="email" placeholder="you@email.com">
+              </div>
+            </div>
+            <div class="field">
+              <label for="cfTopic">Subject</label>
+              <select id="cfTopic">
+                <option>General enquiry</option>
+                <option>Booking help</option>
+                <option>Group / event grooming</option>
+                <option>Gift cards</option>
+                <option>Something else</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="cfMessage">Message</label>
+              <textarea id="cfMessage" rows="5" placeholder="Tell us what you need…"></textarea>
+            </div>
+            <button class="btn btn--gold" type="submit" style="width:100%">Send Message</button>
+            <p id="cfStatus" role="status" style="display:none;margin-top:14px;font-size:14px;color:var(--gold);background:var(--gold-dim);border:1px solid rgba(201,164,58,.35);border-radius:10px;padding:12px 16px"></p>
+          </form>
+          <p style="color:var(--muted);font-size:13px;margin-top:14px">Prefer keeping it quick? <a class="link-arrow" href="https://wa.me/27113258877" target="_blank" rel="noopener">WhatsApp us directly</a>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-kicker">Find us</span>
+        <h2 class="section-title">Two minutes from <em>the Gautrain</em></h2>
+        <p class="section-intro">Shop U12 on the Rosebank Boulevard corner. Parking under the mall or hop off at Rosebank station and walk over.</p>
+      </div>
+      <div class="map-wrap reveal">
+        <iframe title="Map to Iron &amp; Blade Barbershop, 88 Rivonia Road Rosebank"
+          src="https://www.google.com/maps?q=88+Rivonia+Road,+Rosebank,+Johannesburg,+2196&output=embed"
+          referrerpolicy="no-referrer-when-downgrade" loading="lazy" allowfullscreen></iframe>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="cta-banner reveal">
+        <div>
+          <h2>Prefer to just <em>book it?</em></h2>
+          <p>Skip the phone call — grab a real time slot online and get it added to your calendar in one tap.</p>
+        </div>
+        <a class="btn btn--gold" href="booking.html">Book an Appointment</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+  (function () {
+    "use strict";
+
+    function fillHoursTable() {
+      var wrap = document.getElementById("hoursTable");
+      if (!wrap || !window.IB) return;
+      wrap.innerHTML = IB.hours.map(function (h, i) {
+        var now = new Date().getDay();
+        var time = h.open == null ? "Closed" : toLabel(h.open) + " \u2013 " + toLabel(h.close);
+        return '<div class="htr' + (h.open == null ? " is-closed" : "") + (now === h.day ? " is-today" : "") + '">' +
+               '<span class="d1">' + h.label + "</span>" +
+               '<span class="d2">' + time + "</span></div>";
+      }).join("");
+    }
+    function toLabel(dec) {
+      var m = Math.round(dec * 60);
+      var h = Math.floor(m / 60), mm = m % 60;
+      var ap = h >= 12 ? "PM" : "AM";
+      var h12 = h % 12 === 0 ? 12 : h % 12;
+      return h12 + ":" + (mm < 10 ? "0" : "") + mm + " " + ap;
+    }
+
+    function wireForm() {
+      var form = document.getElementById("contactForm");
+      var status = document.getElementById("cfStatus");
+      if (!form) return;
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var name = document.getElementById("cfName").value.trim();
+        var email = document.getElementById("cfEmail").value.trim();
+        var msg = document.getElementById("cfMessage").value.trim();
+        var ok = true;
+
+        function flag(el, on) { el.closest(".field").classList.toggle("is-error", on); }
+        var nEl = document.getElementById("cfName");
+        var eEl = document.getElementById("cfEmail");
+        var mEl = document.getElementById("cfMessage");
+
+        if (name.length < 2) { flag(nEl, true); ok = false; } else flag(nEl, false);
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { flag(eEl, true); ok = false; } else flag(eEl, false);
+        if (msg.length < 10) { flag(mEl, true); ok = false; } else flag(mEl, false);
+        if (!ok) return;
+
+        status.style.display = "block";
+        status.textContent = "\u2713 Thanks, " + name.split(" ")[0] + ". We've received your message and will reply to " + email + " within one working day.";
+        form.reset();
+      });
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", function () { fillHoursTable(); wireForm(); });
+    } else { fillHoursTable(); wireForm(); }
+  })();
+</script>
+
+<!--#FOOTER-->
+</body>
+</html>

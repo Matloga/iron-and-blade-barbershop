@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <clipPath id="bpClip"><path d="M32 2.5 59.5 17.75v28.5L32 61.5 4.5 46.25v-28.5z"/></clipPath>
+  </defs>
+  <path d="M32 2.5 59.5 17.75v28.5L32 61.5 4.5 46.25v-28.5z" fill="#0d0b09" stroke="#c9a227" stroke-width="2.5"/>
+  <g clip-path="url(#bpClip)">
+    <line x1="0" y1="52" x2="24" y2="16" stroke="#c9a227" stroke-width="7.5"/>
+    <line x1="20" y1="56" x2="44" y2="20" stroke="#f5efe3" stroke-width="7.5"/>
+    <line x1="40" y1="60" x2="64" y2="24" stroke="#c9a227" stroke-width="7.5"/>
+  </g>
+</svg>

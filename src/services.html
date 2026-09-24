@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Services &amp; Prices — Iron &amp; Blade Barbershop</title>
+  <meta name="description" content="Full price list for Iron & Blade Barbershop — haircuts, skin fades, beard trims, hot towel shaves, kids cuts and grooming packages. Prices in Rand.">
+  <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Services &amp; Prices — Iron &amp; Blade Barbershop">
+  <meta property="og:description" content="Transparent pricing for every cut, fade, shave and package. Book online in under a minute.">
+  <meta property="og:image" content="assets/img/hero.jpg">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script src="assets/js/data.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+</head>
+<body>
+<!--#HEADER-->
+
+<main>
+  <section class="page-hero">
+    <div class="page-hero-bg"><img src="assets/img/interior.jpg" alt="" aria-hidden="true"></div>
+    <div class="container ph-content">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="index.html">Home</a><span>/</span><span>Services &amp; Prices</span>
+      </nav>
+      <h1>Services &amp; <em>prices</em></h1>
+      <p class="lead">No surprises, ever. Every service below is finished by hand with a straight razor and includes a consultation, wash and product styling. Prices include VAT.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="availability reveal" style="margin-bottom:48px">
+        <span class="pulse"></span>
+        <span><b>Booking now for this week.</b> Choose a service and we'll line you up with live availability — or call <a href="tel:+27113258877" style="color:var(--gold);text-decoration:none">+27 11 325 8877</a>.</span>
+      </div>
+
+      <div id="priceList" class="price-list"></div>
+
+      <div class="cta-banner reveal" style="margin-top:64px">
+        <div>
+          <h2>Ready for a <em>proper cut?</em></h2>
+          <p>Book your chair in under a minute and get the appointment added straight to your phone's calendar.</p>
+        </div>
+        <a class="btn btn--gold" href="booking.html">Book Your Appointment</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+  (function () {
+    "use strict";
+    function renderPrices() {
+      var wrap = document.getElementById("priceList");
+      if (!wrap || !window.IB) return;
+      var html = "";
+      IB.categories.forEach(function (cat) {
+        var services = IB.services.filter(function (s) { return s.cat === cat.id; });
+        if (!services.length) return;
+        html += '<div id="' + cat.id + '" style="margin-bottom:clamp(40px,6vw,64px)" class="reveal">';
+        html += '<div style="display:flex;align-items:center;gap:18px;margin-bottom:22px">' +
+                '<h2 style="font-family:var(--font-display);font-size:clamp(30px,4vw,42px);font-weight:400;letter-spacing:.04em;text-transform:uppercase;margin:0">' + cat.name + '</h2>' +
+                '<span style="height:1px;flex:1;background:var(--line)"></span></div>';
+        services.forEach(function (s) {
+          var badge = s.popular ? '<span class="tag-popular">Popular</span>' : "";
+          html +=
+            '<div class="price-row" style="margin-bottom:10px">' +
+            '<div class="price-info"><h3>' + s.name + " " + badge + "</h3><p>" + s.desc + '</p></div>' +
+            '<div class="price-right"><span class="dur">' + s.duration + " min</span><span class='amt'>R" + s.price + '</span>' +
+            '<a class="btn btn--gold btn--sm" href="booking.html?service=' + s.id + '">Book</a></div>' +
+            "</div>";
+        });
+        html += "</div>";
+      });
+      wrap.innerHTML = html;
+    }
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", renderPrices);
+    } else {
+      renderPrices();
+    }
+  })();
+</script>
+
+<!--#FOOTER-->
+</body>
+</html>

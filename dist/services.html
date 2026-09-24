@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Services &amp; Prices — Iron &amp; Blade Barbershop</title>
+  <meta name="description" content="Full price list for Iron & Blade Barbershop — haircuts, skin fades, beard trims, hot towel shaves, kids cuts and grooming packages. Prices in Rand.">
+  <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Services &amp; Prices — Iron &amp; Blade Barbershop">
+  <meta property="og:description" content="Transparent pricing for every cut, fade, shave and package. Book online in under a minute.">
+  <meta property="og:image" content="assets/img/hero.jpg">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script src="assets/js/data.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+</head>
+<body>
+<header class="site-header" id="siteHeader">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="Iron &amp; Blade Barbershop — home">
+        <img class="brand-mark" src="assets/img/logo.svg" alt="" width="40" height="40">
+        <span class="brand-text">
+          <span class="brand-name">Iron &amp; Blade</span>
+          <span class="brand-sub">Craft Barbershop</span>
+        </span>
+      </a>
+
+      <nav class="site-nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a class="btn btn--gold nav-book" href="booking.html">Book Now</a>
+      </nav>
+
+      <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <div class="mobile-menu-top">
+      <span class="brand brand--static">
+        <img class="brand-mark" src="assets/img/logo.svg" alt="" width="36" height="36">
+        <span class="brand-text"><span class="brand-name">Iron &amp; Blade</span><span class="brand-sub">Craft Barbershop</span></span>
+      </span>
+      <button class="mobile-close" id="mobileClose" type="button" aria-label="Close menu">&#10005;</button>
+    </div>
+    <nav class="mobile-nav" aria-label="Mobile">
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <a class="btn btn--gold btn--block mobile-book" href="booking.html">Book an Appointment</a>
+    <div class="mobile-meta">
+      <span>Mon – Sat · 8:30 AM – 6:00 PM</span>
+      <a href="tel:+27113258877">+27 11 325 8877</a>
+    </div>
+  </div>
+  <div class="menu-backdrop" id="menuBackdrop"></div>
+
+<main>
+  <section class="page-hero">
+    <div class="page-hero-bg"><img src="assets/img/interior.jpg" alt="" aria-hidden="true"></div>
+    <div class="container ph-content">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="index.html">Home</a><span>/</span><span>Services &amp; Prices</span>
+      </nav>
+      <h1>Services &amp; <em>prices</em></h1>
+      <p class="lead">No surprises, ever. Every service below is finished by hand with a straight razor and includes a consultation, wash and product styling. Prices include VAT.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="availability reveal" style="margin-bottom:48px">
+        <span class="pulse"></span>
+        <span><b>Booking now for this week.</b> Choose a service and we'll line you up with live availability — or call <a href="tel:+27113258877" style="color:var(--gold);text-decoration:none">+27 11 325 8877</a>.</span>
+      </div>
+
+      <div id="priceList" class="price-list"></div>
+
+      <div class="cta-banner reveal" style="margin-top:64px">
+        <div>
+          <h2>Ready for a <em>proper cut?</em></h2>
+          <p>Book your chair in under a minute and get the appointment added straight to your phone's calendar.</p>
+        </div>
+        <a class="btn btn--gold" href="booking.html">Book Your Appointment</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+  (function () {
+    "use strict";
+    function renderPrices() {
+      var wrap = document.getElementById("priceList");
+      if (!wrap || !window.IB) return;
+      var html = "";
+      IB.categories.forEach(function (cat) {
+        var services = IB.services.filter(function (s) { return s.cat === cat.id; });
+        if (!services.length) return;
+        html += '<div id="' + cat.id + '" style="margin-bottom:clamp(40px,6vw,64px)" class="reveal">';
+        html += '<div style="display:flex;align-items:center;gap:18px;margin-bottom:22px">' +
+                '<h2 style="font-family:var(--font-display);font-size:clamp(30px,4vw,42px);font-weight:400;letter-spacing:.04em;text-transform:uppercase;margin:0">' + cat.name + '</h2>' +
+                '<span style="height:1px;flex:1;background:var(--line)"></span></div>';
+        services.forEach(function (s) {
+          var badge = s.popular ? '<span class="tag-popular">Popular</span>' : "";
+          html +=
+            '<div class="price-row" style="margin-bottom:10px">' +
+            '<div class="price-info"><h3>' + s.name + " " + badge + "</h3><p>" + s.desc + '</p></div>' +
+            '<div class="price-right"><span class="dur">' + s.duration + " min</span><span class='amt'>R" + s.price + '</span>' +
+            '<a class="btn btn--gold btn--sm" href="booking.html?service=' + s.id + '">Book</a></div>' +
+            "</div>";
+        });
+        html += "</div>";
+      });
+      wrap.innerHTML = html;
+    }
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", renderPrices);
+    } else {
+      renderPrices();
+    }
+  })();
+</script>
+
+<footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-brand">
+          <span class="brand brand--static">
+            <img class="brand-mark" src="assets/img/logo.svg" alt="" width="44" height="44">
+            <span class="brand-text"><span class="brand-name">Iron &amp; Blade</span><span class="brand-sub">Craft Barbershop</span></span>
+          </span>
+          <p class="footer-blurb">Precision cuts, clean fades and old-school hot-towel shaves in the heart of Rosebank. Book ahead, walk in welcome. Leave sharper than you arrived.</p>
+          <div class="social">
+            <a class="social-link" href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.4" cy="6.6" r="1.4" fill="currentColor"/></svg></a>
+            <a class="social-link" href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8.5V6.8c0-.9.6-1.3 1.4-1.3h2V2.5h-2.8C11.4 2.5 10 5 10 7.2v1.3H7.5v3H10V21.5h4V11.5h2.6l.4-3H14z" fill="currentColor"/></svg></a>
+            <a class="social-link" href="https://www.tiktok.com/" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 3c.3 1.9 1.5 3.3 3.4 3.6v3c-1.5 0-2.8-.5-3.9-1.3v6.1c0 3.3-2.4 5.9-5.7 5.9-3 0-5.4-2.3-5.4-5.4 0-3.1 2.4-5.4 5.5-5.4.4 0 .9 0 1.3.1v3.1c-.4-.2-.9-.3-1.3-.3-1.5 0-2.6 1.1-2.6 2.6s1.1 2.6 2.6 2.6c1.6 0 2.8-1.2 2.8-2.9V3h3.3z" fill="currentColor"/></svg></a>
+            <a class="social-link" href="https://wa.me/27113258877" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5A9.5 9.5 0 0 0 2.6 16.9L1.5 21.5l4.7-1.2A9.5 9.5 0 1 0 12 2.5zm0 17.3a7.8 7.8 0 0 1-3.9-1L7.4 19l-1.8.5.5-1.8-.8-1.3a7.8 7.8 0 1 1 6.7 5.6zM17 13.8c-.3-.2-1.5-.8-1.7-.9-.2-.1-.4-.2-.5 0l-.7.9c-.1.2-.3.2-.5.1-.3-.2-1.1-.4-2-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.2 0-.4.1-.5l.4-.5c.1-.2.2-.3.3-.4 0-.2 0-.3 0-.4L10 6.4c-.2-.5-.5-.4-.7-.4h-.5c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.2s.9 2.5 1.1 2.6c.1.1 1.8 2.9 4.5 4 1.7.6 2.3.6 3.1.5.5-.2 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z" fill="currentColor"/></svg></a>
+          </div>
+        </div>
+
+        <nav class="footer-col" aria-label="Explore">
+          <h4 class="footer-title">Explore</h4>
+          <a href="index.html">Home</a>
+          <a href="services.html">Services &amp; Prices</a>
+          <a href="about.html">About Us</a>
+          <a href="contact.html">Contact</a>
+          <a href="booking.html">Book an Appointment</a>
+        </nav>
+
+        <nav class="footer-col" aria-label="Popular services">
+          <h4 class="footer-title">Popular</h4>
+          <a href="services.html#hair">Skin Fade &amp; Haircuts</a>
+          <a href="services.html#beard">Beard &amp; Shaves</a>
+          <a href="services.html#packages">Barber Packages</a>
+          <a href="services.html#kids">Kids Cuts</a>
+          <a href="booking.html">First Visit Offer</a>
+        </nav>
+
+        <div class="footer-col">
+          <h4 class="footer-title">Visit Us</h4>
+          <p>Shop U12, 88 Rivonia Road<br>Rosebank, Johannesburg, 2196</p>
+          <p><a href="tel:+27113258877">+27 11 325 8877</a><br><a href="mailto:hello@ironandblade.co.za">hello@ironandblade.co.za</a></p>
+          <div class="footer-hours">
+            <span>Mon – Fri &nbsp;8:30 AM – 6:00 PM</span>
+            <span>Saturday &nbsp;8:00 AM – 4:00 PM</span>
+            <span>Sunday &nbsp;Closed</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-legal">
+        <p>&copy; <span id="js-year">2026</span> Iron &amp; Blade Barbershop. All rights reserved.</p>
+        <nav aria-label="Legal">
+          <a href="terms.html">Terms &amp; Conditions</a>
+          <a href="privacy.html">Privacy Policy</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <div class="popup" id="offerPopup" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="popupTitle">
+    <div class="popup-backdrop"></div>
+    <div class="popup-card">
+      <button class="popup-close" id="popupClose" type="button" aria-label="Close offer">&times;</button>
+      <span class="popup-badge">First visit offer</span>
+      <h2 id="popupTitle">20% off<br><em>your first cut</em></h2>
+      <p class="pc-sub">New to the chair? Take 20% off any service for your first visit. Walk in, mention the code at the counter, or book online in one minute.</p>
+      <div class="popup-offer">
+        <strong class="discount">20%</strong>
+        <p><b>OFF YOUR FIRST VISIT</b><br>Valid Mon – Sat. No sign-up needed, just use code below.</p>
+      </div>
+      <div class="pc-actions">
+        <a class="btn btn--gold" href="booking.html">Book &amp; Claim Offer</a>
+        <a class="btn btn--outline" href="services.html">View Services</a>
+      </div>
+      <p class="pc-note">Limited to new guests &middot; Not stackable with other offers &middot; T&amp;Cs apply in our <a href="terms.html">Terms &amp; Conditions</a>.</p>
+    </div>
+  </div>
+</body>
+</html>

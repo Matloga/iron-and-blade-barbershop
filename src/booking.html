@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Book an Appointment — Iron &amp; Blade Barbershop</title>
+  <meta name="description" content="Book your barber online at Iron &amp; Blade Rosebank. Pick a service, barber, date and time, then add the appointment to your Google or Apple calendar automatically.">
+  <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Book an Appointment — Iron &amp; Blade Barbershop">
+  <meta property="og:description" content="Live availability. Instant confirmation. One-tap calendar invites for Google Calendar and Apple Calendar.">
+  <meta property="og:image" content="assets/img/hero.jpg">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script src="assets/js/data.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+  <script src="assets/js/booking.js" defer></script>
+</head>
+<body>
+<!--#HEADER-->
+
+<main>
+  <section class="page-hero">
+    <div class="container ph-content">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="index.html">Home</a><span>/</span><span>Book</span>
+      </nav>
+      <h1>Book your <em>chair</em></h1>
+      <p class="lead">Three quick steps: pick a service, choose your barber and time, then add the appointment straight to your calendar. Instant confirmation — no waiting for a reply.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div id="bookingWizard" class="booking-layout">
+        <div>
+          <div class="steps-progress" aria-hidden="true"></div>
+
+          <!-- Step 1: Service -->
+          <div class="wizard-step" id="step-1">
+            <h2 style="font-family:var(--font-display);font-size:clamp(30px,4vw,40px);font-weight:400;text-transform:uppercase;letter-spacing:.03em;margin-bottom:24px">Choose your <span style="color:var(--gold)">service</span></h2>
+            <div id="servicesGrid"></div>
+            <div class="wizard-nav">
+              <span></span>
+              <button class="btn btn--gold" type="button" data-action="next">Continue &rarr;</button>
+            </div>
+          </div>
+
+          <!-- Step 2: Barber, date, time -->
+          <div class="wizard-step" id="step-2">
+            <h2 style="font-family:var(--font-display);font-size:clamp(30px,4vw,40px);font-weight:400;text-transform:uppercase;letter-spacing:.03em;margin-bottom:24px">Barber, date &amp; <span style="color:var(--gold)">time</span></h2>
+
+            <div style="margin-bottom:28px">
+              <h3 style="font-size:15px;margin-bottom:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--paper-dim)">Who's on the clippers?</h3>
+              <div id="barberGrid" class="option-grid"></div>
+            </div>
+
+            <div style="margin-bottom:28px">
+              <h3 style="font-size:15px;margin-bottom:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--paper-dim)">Pick a day</h3>
+              <div id="dateGrid" class="date-scroller"></div>
+              <p style="font-size:12.5px;color:var(--muted);margin-top:10px">Closed Sundays. If you'd rather walk in, find us at <a href="contact.html" style="color:var(--gold)">Shop U12, 88 Rivonia Road</a>.</p>
+            </div>
+
+            <div style="margin-bottom:8px">
+              <h3 style="font-size:15px;margin-bottom:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--paper-dim)">Available times</h3>
+              <p id="timeHint" style="font-size:12.5px;color:var(--muted);margin-bottom:14px">Select a service and a date to reveal slots.</p>
+              <div id="timeGrid" class="time-grid"></div>
+              <div id="timeEmpty" style="display:none;flex-direction:column;gap:6px;padding:26px;border:1px dashed var(--line-strong);border-radius:14px;text-align:center;color:var(--muted);font-size:14px">
+                <strong style="color:var(--paper);font-size:15px">No times left that day</strong>
+                <p style="margin:0">Try another day — or walk in and we'll fit you in.</p>
+              </div>
+            </div>
+
+            <div class="wizard-nav">
+              <button class="btn btn--outline" type="button" data-action="back">&larr; Back</button>
+              <button class="btn btn--gold" type="button" data-action="next">Continue &rarr;</button>
+            </div>
+          </div>
+
+          <!-- Step 3: Details -->
+          <div class="wizard-step" id="step-3">
+            <h2 style="font-family:var(--font-display);font-size:clamp(30px,4vw,40px);font-weight:400;text-transform:uppercase;letter-spacing:.03em;margin-bottom:24px">Your <span style="color:var(--gold)">details</span></h2>
+
+            <form id="detailsForm" novalidate>
+              <div class="form-row-2">
+                <div class="field">
+                  <label for="bkName">Full name <span class="req">*</span></label>
+                  <input id="bkName" name="name" type="text" autocomplete="name" placeholder="e.g. Thabo Mokoena">
+                  <span class="err-msg">Please enter your name.</span>
+                </div>
+                <div class="field">
+                  <label for="bkPhone">Phone <span class="req">*</span></label>
+                  <input id="bkPhone" name="phone" type="tel" autocomplete="tel" placeholder="+27 __ ___ ____">
+                  <span class="err-msg">Please enter a valid phone number.</span>
+                </div>
+              </div>
+              <div class="form-row-2">
+                <div class="field">
+                  <label for="bkEmail">Email <span class="req">*</span></label>
+                  <input id="bkEmail" name="email" type="email" autocomplete="email" placeholder="you@email.com">
+                  <span class="err-msg">Please enter a valid email address.</span>
+                </div>
+                <div class="field">
+                  <label for="bkNotes">Notes <span style="color:var(--muted)">(optional)</span></label>
+                  <input id="bkNotes" name="notes" type="text" placeholder="Style references, allergies, requests…">
+                </div>
+              </div>
+              <p style="font-size:13px;color:var(--muted);margin:4px 0 0">Your details are used only to confirm and send this appointment to your calendar. We never share your info.</p>
+            </form>
+
+            <h3 style="font-size:15px;margin:28px 0 14px;letter-spacing:.14em;text-transform:uppercase;color:var(--paper-dim)">Review your booking</h3>
+            <div id="reviewBox" class="review-box"></div>
+
+            <div class="wizard-nav">
+              <button class="btn btn--outline" type="button" data-action="back">&larr; Back</button>
+              <button class="btn btn--gold" type="button" data-action="confirm">Confirm Booking</button>
+            </div>
+            <p style="font-size:12.5px;color:var(--muted);margin-top:16px">By confirming you agree to our <a href="terms.html" style="color:var(--gold)">Terms &amp; Conditions</a>. Cancellation is free up to 4 hours before your slot.</p>
+          </div>
+
+          <!-- Step 4: Success -->
+          <div class="wizard-step" id="step-4">
+            <div class="success-hero">
+              <div class="success-check">&#10003;</div>
+              <h2>You're <em>booked</em></h2>
+              <p id="confIntro">Appointment confirmed. Your reference is below — save it or screenshot this screen.</p>
+              <span class="ref-code js-ref">IB-XXXXXX</span>
+              <div class="js-summary" style="margin-top:18px;color:var(--paper-dim);font-size:15px"></div>
+            </div>
+
+            <div style="max-width:560px;margin:0 auto">
+              <p style="text-align:center;margin-top:34px;letter-spacing:.14em;text-transform:uppercase;font-size:13px;font-weight:800;color:var(--paper-dim)">Add this to your calendar</p>
+              <div class="cal-actions js-calendar"></div>
+              <p class="note-tip"><strong>Already in your calendar?</strong> <span class="js-cal-remind"></span></p>
+            </div>
+
+            <div class="wizard-nav" style="max-width:560px;margin-inline:auto">
+              <button class="btn btn--outline" type="button" data-action="restart">&larr; Book another</button>
+              <a class="btn btn--gold" href="index.html">Back to Home</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="sidecard">
+          <h3>Good to <span>know</span></h3>
+          <p>We finish every cut by hand with a straight razor. Touch-up visits are free within 14 days — <a href="contact.html" style="color:var(--gold)">just call us</a>.</p>
+          <div class="hours-mini js-hours-mini"></div>
+          <a class="btn btn--outline btn--block" style="margin-top:22px" href="contact.html">Contact &amp; Directions</a>
+
+          <h3 style="margin-top:34px">Your <span>bookings</span></h3>
+          <ul class="lst" id="upcomingList" style="margin-top:8px"></ul>
+          <button class="link-arrow" id="openPopupRef" type="button" style="border:0;background:none;padding:0;margin-top:18px">Claim 20% off first visit</button>
+        </aside>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+  (function () {
+    "use strict";
+    function fillHoursMini() {
+      var wrap = document.querySelector(".js-hours-mini");
+      if (!wrap || !window.IB) return;
+      wrap.innerHTML = IB.hours.map(function (h) {
+        var time = h.open == null ? "Closed" : toLabel(h.open) + " \u2013 " + toLabel(h.close);
+        var now = new Date().getDay();
+        return '<div class="hr' + (h.open == null ? " is-closed" : "") + (now === h.day ? " is-today" : "") + '"><span>' + h.label + "</span><span>" + time + "</span></div>";
+      }).join("");
+    }
+    function toLabel(dec) {
+      var m = Math.round(dec * 60);
+      var h = Math.floor(m / 60), mm = m % 60;
+      var ap = h >= 12 ? "PM" : "AM";
+      var h12 = h % 12 === 0 ? 12 : h % 12;
+      return h12 + ":" + (mm < 10 ? "0" : "") + mm + " " + ap;
+    }
+    function wirePopupRef() {
+      var btn = document.getElementById("openPopupRef");
+      var popup = document.getElementById("offerPopup");
+      if (btn && popup) btn.addEventListener("click", function () { popup.classList.add("is-open"); });
+    }
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", function () { fillHoursMini(); wirePopupRef(); });
+    } else {
+      fillHoursMini(); wirePopupRef();
+    }
+  })();
+</script>
+
+<!--#FOOTER-->
+</body>
+</html>

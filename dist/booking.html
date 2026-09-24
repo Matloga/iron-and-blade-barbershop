@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Book an Appointment — Iron &amp; Blade Barbershop</title>
+  <meta name="description" content="Book your barber online at Iron &amp; Blade Rosebank. Pick a service, barber, date and time, then add the appointment to your Google or Apple calendar automatically.">
+  <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Book an Appointment — Iron &amp; Blade Barbershop">
+  <meta property="og:description" content="Live availability. Instant confirmation. One-tap calendar invites for Google Calendar and Apple Calendar.">
+  <meta property="og:image" content="assets/img/hero.jpg">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script src="assets/js/data.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+  <script src="assets/js/booking.js" defer></script>
+</head>
+<body>
+<header class="site-header" id="siteHeader">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="Iron &amp; Blade Barbershop — home">
+        <img class="brand-mark" src="assets/img/logo.svg" alt="" width="40" height="40">
+        <span class="brand-text">
+          <span class="brand-name">Iron &amp; Blade</span>
+          <span class="brand-sub">Craft Barbershop</span>
+        </span>
+      </a>
+
+      <nav class="site-nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a class="btn btn--gold nav-book" href="booking.html">Book Now</a>
+      </nav>
+
+      <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <div class="mobile-menu-top">
+      <span class="brand brand--static">
+        <img class="brand-mark" src="assets/img/logo.svg" alt="" width="36" height="36">
+        <span class="brand-text"><span class="brand-name">Iron &amp; Blade</span><span class="brand-sub">Craft Barbershop</span></span>
+      </span>
+      <button class="mobile-close" id="mobileClose" type="button" aria-label="Close menu">&#10005;</button>
+    </div>
+    <nav class="mobile-nav" aria-label="Mobile">
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <a class="btn btn--gold btn--block mobile-book" href="booking.html">Book an Appointment</a>
+    <div class="mobile-meta">
+      <span>Mon – Sat · 8:30 AM – 6:00 PM</span>
+      <a href="tel:+27113258877">+27 11 325 8877</a>
+    </div>
+  </div>
+  <div class="menu-backdrop" id="menuBackdrop"></div>
+
+<main>
+  <section class="page-hero">
+    <div class="container ph-content">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="index.html">Home</a><span>/</span><span>Book</span>
+      </nav>
+      <h1>Book your <em>chair</em></h1>
+      <p class="lead">Three quick steps: pick a service, choose your barber and time, then add the appointment straight to your calendar. Instant confirmation — no waiting for a reply.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div id="bookingWizard" class="booking-layout">
+        <div>
+          <div class="steps-progress" aria-hidden="true"></div>
+
+          <!-- Step 1: Service -->
+          <div class="wizard-step" id="step-1">
+            <h2 style="font-family:var(--font-display);font-size:clamp(30px,4vw,40px);font-weight:400;text-transform:uppercase;letter-spacing:.03em;margin-bottom:24px">Choose your <span style="color:var(--gold)">service</span></h2>
+            <div id="servicesGrid"></div>
+            <div class="wizard-nav">
+              <span></span>
+              <button class="btn btn--gold" type="button" data-action="next">Continue &rarr;</button>
+            </div>
+          </div>
+
+          <!-- Step 2: Barber, date, time -->
+          <div class="wizard-step" id="step-2">
+            <h2 style="font-family:var(--font-display);font-size:clamp(30px,4vw,40px);font-weight:400;text-transform:uppercase;letter-spacing:.03em;margin-bottom:24px">Barber, date &amp; <span style="color:var(--gold)">time</span></h2>
+
+            <div style="margin-bottom:28px">
+              <h3 style="font-size:15px;margin-bottom:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--paper-dim)">Who's on the clippers?</h3>
+              <div id="barberGrid" class="option-grid"></div>
+            </div>
+
+            <div style="margin-bottom:28px">
+              <h3 style="font-size:15px;margin-bottom:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--paper-dim)">Pick a day</h3>
+              <div id="dateGrid" class="date-scroller"></div>
+              <p style="font-size:12.5px;color:var(--muted);margin-top:10px">Closed Sundays. If you'd rather walk in, find us at <a href="contact.html" style="color:var(--gold)">Shop U12, 88 Rivonia Road</a>.</p>
+            </div>
+
+            <div style="margin-bottom:8px">
+              <h3 style="font-size:15px;margin-bottom:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--paper-dim)">Available times</h3>
+              <p id="timeHint" style="font-size:12.5px;color:var(--muted);margin-bottom:14px">Select a service and a date to reveal slots.</p>
+              <div id="timeGrid" class="time-grid"></div>
+              <div id="timeEmpty" style="display:none;flex-direction:column;gap:6px;padding:26px;border:1px dashed var(--line-strong);border-radius:14px;text-align:center;color:var(--muted);font-size:14px">
+                <strong style="color:var(--paper);font-size:15px">No times left that day</strong>
+                <p style="margin:0">Try another day — or walk in and we'll fit you in.</p>
+              </div>
+            </div>
+
+            <div class="wizard-nav">
+              <button class="btn btn--outline" type="button" data-action="back">&larr; Back</button>
+              <button class="btn btn--gold" type="button" data-action="next">Continue &rarr;</button>
+            </div>
+          </div>
+
+          <!-- Step 3: Details -->
+          <div class="wizard-step" id="step-3">
+            <h2 style="font-family:var(--font-display);font-size:clamp(30px,4vw,40px);font-weight:400;text-transform:uppercase;letter-spacing:.03em;margin-bottom:24px">Your <span style="color:var(--gold)">details</span></h2>
+
+            <form id="detailsForm" novalidate>
+              <div class="form-row-2">
+                <div class="field">
+                  <label for="bkName">Full name <span class="req">*</span></label>
+                  <input id="bkName" name="name" type="text" autocomplete="name" placeholder="e.g. Thabo Mokoena">
+                  <span class="err-msg">Please enter your name.</span>
+                </div>
+                <div class="field">
+                  <label for="bkPhone">Phone <span class="req">*</span></label>
+                  <input id="bkPhone" name="phone" type="tel" autocomplete="tel" placeholder="+27 __ ___ ____">
+                  <span class="err-msg">Please enter a valid phone number.</span>
+                </div>
+              </div>
+              <div class="form-row-2">
+                <div class="field">
+                  <label for="bkEmail">Email <span class="req">*</span></label>
+                  <input id="bkEmail" name="email" type="email" autocomplete="email" placeholder="you@email.com">
+                  <span class="err-msg">Please enter a valid email address.</span>
+                </div>
+                <div class="field">
+                  <label for="bkNotes">Notes <span style="color:var(--muted)">(optional)</span></label>
+                  <input id="bkNotes" name="notes" type="text" placeholder="Style references, allergies, requests…">
+                </div>
+              </div>
+              <p style="font-size:13px;color:var(--muted);margin:4px 0 0">Your details are used only to confirm and send this appointment to your calendar. We never share your info.</p>
+            </form>
+
+            <h3 style="font-size:15px;margin:28px 0 14px;letter-spacing:.14em;text-transform:uppercase;color:var(--paper-dim)">Review your booking</h3>
+            <div id="reviewBox" class="review-box"></div>
+
+            <div class="wizard-nav">
+              <button class="btn btn--outline" type="button" data-action="back">&larr; Back</button>
+              <button class="btn btn--gold" type="button" data-action="confirm">Confirm Booking</button>
+            </div>
+            <p style="font-size:12.5px;color:var(--muted);margin-top:16px">By confirming you agree to our <a href="terms.html" style="color:var(--gold)">Terms &amp; Conditions</a>. Cancellation is free up to 4 hours before your slot.</p>
+          </div>
+
+          <!-- Step 4: Success -->
+          <div class="wizard-step" id="step-4">
+            <div class="success-hero">
+              <div class="success-check">&#10003;</div>
+              <h2>You're <em>booked</em></h2>
+              <p id="confIntro">Appointment confirmed. Your reference is below — save it or screenshot this screen.</p>
+              <span class="ref-code js-ref">IB-XXXXXX</span>
+              <div class="js-summary" style="margin-top:18px;color:var(--paper-dim);font-size:15px"></div>
+            </div>
+
+            <div style="max-width:560px;margin:0 auto">
+              <p style="text-align:center;margin-top:34px;letter-spacing:.14em;text-transform:uppercase;font-size:13px;font-weight:800;color:var(--paper-dim)">Add this to your calendar</p>
+              <div class="cal-actions js-calendar"></div>
+              <p class="note-tip"><strong>Already in your calendar?</strong> <span class="js-cal-remind"></span></p>
+            </div>
+
+            <div class="wizard-nav" style="max-width:560px;margin-inline:auto">
+              <button class="btn btn--outline" type="button" data-action="restart">&larr; Book another</button>
+              <a class="btn btn--gold" href="index.html">Back to Home</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="sidecard">
+          <h3>Good to <span>know</span></h3>
+          <p>We finish every cut by hand with a straight razor. Touch-up visits are free within 14 days — <a href="contact.html" style="color:var(--gold)">just call us</a>.</p>
+          <div class="hours-mini js-hours-mini"></div>
+          <a class="btn btn--outline btn--block" style="margin-top:22px" href="contact.html">Contact &amp; Directions</a>
+
+          <h3 style="margin-top:34px">Your <span>bookings</span></h3>
+          <ul class="lst" id="upcomingList" style="margin-top:8px"></ul>
+          <button class="link-arrow" id="openPopupRef" type="button" style="border:0;background:none;padding:0;margin-top:18px">Claim 20% off first visit</button>
+        </aside>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+  (function () {
+    "use strict";
+    function fillHoursMini() {
+      var wrap = document.querySelector(".js-hours-mini");
+      if (!wrap || !window.IB) return;
+      wrap.innerHTML = IB.hours.map(function (h) {
+        var time = h.open == null ? "Closed" : toLabel(h.open) + " \u2013 " + toLabel(h.close);
+        var now = new Date().getDay();
+        return '<div class="hr' + (h.open == null ? " is-closed" : "") + (now === h.day ? " is-today" : "") + '"><span>' + h.label + "</span><span>" + time + "</span></div>";
+      }).join("");
+    }
+    function toLabel(dec) {
+      var m = Math.round(dec * 60);
+      var h = Math.floor(m / 60), mm = m % 60;
+      var ap = h >= 12 ? "PM" : "AM";
+      var h12 = h % 12 === 0 ? 12 : h % 12;
+      return h12 + ":" + (mm < 10 ? "0" : "") + mm + " " + ap;
+    }
+    function wirePopupRef() {
+      var btn = document.getElementById("openPopupRef");
+      var popup = document.getElementById("offerPopup");
+      if (btn && popup) btn.addEventListener("click", function () { popup.classList.add("is-open"); });
+    }
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", function () { fillHoursMini(); wirePopupRef(); });
+    } else {
+      fillHoursMini(); wirePopupRef();
+    }
+  })();
+</script>
+
+<footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-brand">
+          <span class="brand brand--static">
+            <img class="brand-mark" src="assets/img/logo.svg" alt="" width="44" height="44">
+            <span class="brand-text"><span class="brand-name">Iron &amp; Blade</span><span class="brand-sub">Craft Barbershop</span></span>
+          </span>
+          <p class="footer-blurb">Precision cuts, clean fades and old-school hot-towel shaves in the heart of Rosebank. Book ahead, walk in welcome. Leave sharper than you arrived.</p>
+          <div class="social">
+            <a class="social-link" href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.4" cy="6.6" r="1.4" fill="currentColor"/></svg></a>
+            <a class="social-link" href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8.5V6.8c0-.9.6-1.3 1.4-1.3h2V2.5h-2.8C11.4 2.5 10 5 10 7.2v1.3H7.5v3H10V21.5h4V11.5h2.6l.4-3H14z" fill="currentColor"/></svg></a>
+            <a class="social-link" href="https://www.tiktok.com/" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 3c.3 1.9 1.5 3.3 3.4 3.6v3c-1.5 0-2.8-.5-3.9-1.3v6.1c0 3.3-2.4 5.9-5.7 5.9-3 0-5.4-2.3-5.4-5.4 0-3.1 2.4-5.4 5.5-5.4.4 0 .9 0 1.3.1v3.1c-.4-.2-.9-.3-1.3-.3-1.5 0-2.6 1.1-2.6 2.6s1.1 2.6 2.6 2.6c1.6 0 2.8-1.2 2.8-2.9V3h3.3z" fill="currentColor"/></svg></a>
+            <a class="social-link" href="https://wa.me/27113258877" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5A9.5 9.5 0 0 0 2.6 16.9L1.5 21.5l4.7-1.2A9.5 9.5 0 1 0 12 2.5zm0 17.3a7.8 7.8 0 0 1-3.9-1L7.4 19l-1.8.5.5-1.8-.8-1.3a7.8 7.8 0 1 1 6.7 5.6zM17 13.8c-.3-.2-1.5-.8-1.7-.9-.2-.1-.4-.2-.5 0l-.7.9c-.1.2-.3.2-.5.1-.3-.2-1.1-.4-2-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.2 0-.4.1-.5l.4-.5c.1-.2.2-.3.3-.4 0-.2 0-.3 0-.4L10 6.4c-.2-.5-.5-.4-.7-.4h-.5c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.2s.9 2.5 1.1 2.6c.1.1 1.8 2.9 4.5 4 1.7.6 2.3.6 3.1.5.5-.2 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z" fill="currentColor"/></svg></a>
+          </div>
+        </div>
+
+        <nav class="footer-col" aria-label="Explore">
+          <h4 class="footer-title">Explore</h4>
+          <a href="index.html">Home</a>
+          <a href="services.html">Services &amp; Prices</a>
+          <a href="about.html">About Us</a>
+          <a href="contact.html">Contact</a>
+          <a href="booking.html">Book an Appointment</a>
+        </nav>
+
+        <nav class="footer-col" aria-label="Popular services">
+          <h4 class="footer-title">Popular</h4>
+          <a href="services.html#hair">Skin Fade &amp; Haircuts</a>
+          <a href="services.html#beard">Beard &amp; Shaves</a>
+          <a href="services.html#packages">Barber Packages</a>
+          <a href="services.html#kids">Kids Cuts</a>
+          <a href="booking.html">First Visit Offer</a>
+        </nav>
+
+        <div class="footer-col">
+          <h4 class="footer-title">Visit Us</h4>
+          <p>Shop U12, 88 Rivonia Road<br>Rosebank, Johannesburg, 2196</p>
+          <p><a href="tel:+27113258877">+27 11 325 8877</a><br><a href="mailto:hello@ironandblade.co.za">hello@ironandblade.co.za</a></p>
+          <div class="footer-hours">
+            <span>Mon – Fri &nbsp;8:30 AM – 6:00 PM</span>
+            <span>Saturday &nbsp;8:00 AM – 4:00 PM</span>
+            <span>Sunday &nbsp;Closed</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-legal">
+        <p>&copy; <span id="js-year">2026</span> Iron &amp; Blade Barbershop. All rights reserved.</p>
+        <nav aria-label="Legal">
+          <a href="terms.html">Terms &amp; Conditions</a>
+          <a href="privacy.html">Privacy Policy</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <div class="popup" id="offerPopup" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="popupTitle">
+    <div class="popup-backdrop"></div>
+    <div class="popup-card">
+      <button class="popup-close" id="popupClose" type="button" aria-label="Close offer">&times;</button>
+      <span class="popup-badge">First visit offer</span>
+      <h2 id="popupTitle">20% off<br><em>your first cut</em></h2>
+      <p class="pc-sub">New to the chair? Take 20% off any service for your first visit. Walk in, mention the code at the counter, or book online in one minute.</p>
+      <div class="popup-offer">
+        <strong class="discount">20%</strong>
+        <p><b>OFF YOUR FIRST VISIT</b><br>Valid Mon – Sat. No sign-up needed, just use code below.</p>
+      </div>
+      <div class="pc-actions">
+        <a class="btn btn--gold" href="booking.html">Book &amp; Claim Offer</a>
+        <a class="btn btn--outline" href="services.html">View Services</a>
+      </div>
+      <p class="pc-note">Limited to new guests &middot; Not stackable with other offers &middot; T&amp;Cs apply in our <a href="terms.html">Terms &amp; Conditions</a>.</p>
+    </div>
+  </div>
+</body>
+</html>
