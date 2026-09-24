@@ -513,7 +513,7 @@
       (booking.notes ? "Notes: " + booking.notes : ""),
       "",
       "Iron & Blade Barbershop — " + IB.brand.address,
-      "Tel: " + IB.brand.phone + " | hello@ironandblade.co.za"
+      "Tel: " + IB.brand.phone + " | " + IB.brand.email
     ].filter(Boolean).join("\n");
 
     var lines = [
